@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+   <!-- <link href="{% static 'css/headers.css' %}" rel="stylesheet"> -->
+    <style>
+        .errorlist {
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+
+<!--
+<header class="p-3 bg-success text-white mb-5">
+    <div class="container-fluid px-5">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center me-4 mb-lg-0 text-white text-decoration-none">
+          <img src="{% static 'images/logo_biale.png' %}" alt="Logo" width="120" height="60">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="#" class="nav-link px-2">Strona Główna</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Kurtyny PCV</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Kurtyny Przesuwne</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Kalkulator</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Sklep</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Kontakt</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control " placeholder="Szukaj..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-outline-light me-2">Login</button>
+          <button type="button" class="btn btn-warning">Sign-up</button>
+        </div>
+      </div>
+    </div>
+  </header>
+-->
+<div class="container-fluid bg-light">
+<nav class="navbar navbar-expand-xl bg-success navbar-dark fixed-top shadow-sm">
+      <div class="container">
+        <a href="#" class="navbar-brand">
+            <img src="{% static 'images/logo_biale.png' %}" alt="Logo" width="160" height="70">
+        </a>
+        <button
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          class="navbar-toggler"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="#"  class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="#about" class="nav-link">O nas</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Przesuwne</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Kontakt</a>
+            </li>
+              <li class="nav-item">
+              <a href="#" class="nav-link">Kalkulator</a>
+            </li>
+              <li class="nav-item">
+              <a href="#" class="nav-link">Sklep</a>
+            </li>
+              <li class="nav-item ms-5">
+                <form class="d-flex" role="search">
+                    <input type="text" class="form-control me-2" placeholder="Szukaj na stronie ..."/>
+                    <button class="btn btn-warning">Search</button>
+                </form>
+              </li>
+              {% if request.user.is_authenticated %}
+
+              <li class="dropdown ms-4">
+                     <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">{{request.user.username}}</button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'dashboard' %}" class="dropdown-item">Panel</a></li>
+                        <li><a href="{% url 'logout' %}" class="dropdown-item">Wyloguj</a></li>
+                    </ul>
+              </li>
+
+              {% else %}
+                  <li class="nav-item ms-5">
+                   <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light me-2">Zaloguj</button></a>
+                  </li>
+              {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mt-5 mb-5 ">-</div>
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+</body>
+</html>

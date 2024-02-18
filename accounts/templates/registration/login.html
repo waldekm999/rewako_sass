@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %}Logowanie{% endblock %}
+{% block content %}
+
+
+<div class="container d-flex justify-content-center mt-5 p-5 bg-white rounded shadow ">
+    <div>
+        <h1 class="text-primary h1">Logowanie</h1>
+        {% if form.errors %}
+        <p class="text-danger">Nieprawidłowe dane logowania.</p>
+        {% else %}
+        <p>Wypełnij poniższy formularz, aby się zalogować. Jeżeli nie masz jeszcze
+            konta, możesz je utworzyć <a href="{% url 'register' %}">tutaj</a>.
+        </p>
+        {% endif %}
+        <form action="{% url 'login' %}" method="post">
+            <div class="form-group">
+                <label class="form-label">{{ form.username.label_tag }}</label>
+                {{ form.username.errors }}
+                {% render_field form.username class="form-control" %}
+                <label class="form-label">{{ form.password.label_tag }}</label>
+                {{ form.password.errors }}
+                {% render_field form.password class="form-control" %}
+                <input type="hidden" name="next" value="{{ next }}" />
+                <p><input type="submit" value="Zaloguj" class="btn btn-primary mt-2"></p>
+            </div>
+             {% csrf_token %}
+        </form>
+    </div>
+    <p><a href="{% url 'password_reset' %}">Zapomniałeś hasła?</a></p>
+</div>
+
+
+{% endblock %}
+

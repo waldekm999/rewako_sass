@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Panel główny{% endblock %}
+{% block content %}
+<h1 class="h1">Panel główny</h1>
+<p class="h5">Witaj w panelu głównym.</p>
+<p>Nazwa użytkownika{{ request.user.username }}</p>
+<p>Wmail: {{ request.user.email }}</p>
+<p>Czy jest pracownikiem: {{ request.user.is_staff }}</p>
+<p>Czy to superuser: {{ request.user.is_superuser }}</p>
+<p>Czy aktywny: {{ request.user.is_active }}</p>
+<p>Czy anonimowy: {{ request.user.is_anonymous }}</p>
+<p>Ostatnie logowanie: {{ request.user.last_login }}</p>
+<p>Data utworzenia konta: {{ request.user.date_joined }}</p>
+<p>{{ request.user.groups.all }}</p>
+<p>{{ request.user.user_permissions.all }}</p>
+<p>Nazwa pełna: {{ request.user.get_full_name }}</p>
+<p>Nazwa skrócona: {{ request.user.get_short_name }}</p>
+<p>{{ request.user.get_username }}</p>
+<p></p><a href="{% url 'logout' %}">Wyloguj się</a></p>
+<p><a href="{% url 'password_change' %}">Zmień hasło</a></p>
+
+{% endblock %}
