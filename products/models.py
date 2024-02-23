@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 """
 def category_image_upload_path(instance, filename):
@@ -29,6 +30,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_category', args=[self.slug])
 
 
 class Product(models.Model):
@@ -99,46 +103,5 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-
-"""
-class Stripe(Product):
-    COLOR_CHOOSES = (
-        ('black', 'Black'),
-        ('blue', 'Blue'),
-        ('green', 'Green'),
-        ('grey', 'Grey'),
-        ('red', 'Red'),
-        ('transparent', 'Transparent'),
-        ('white', 'White'),
-        ('yellow', 'Yellow'),
-    )
-    width = models.IntegerField()
-    thickness = models.IntegerField()
-    colour = models.CharField(max_length=24, choices=COLOR_CHOOSES, default='transparent')
-    isCool = models.BooleanField(default=False)
-    ribbed = models.BooleanField(default=False)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='stripes')
-
-    class Meta:
-        verbose_name = 'stripe'
-        verbose_name_plural = 'stripes'
-
-
-class Plate(Product):
-    width = models.IntegerField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='plates')
-
-    class Meta:
-        verbose_name = 'plate'
-        verbose_name_plural = 'plates'
-
-
-class Hanger(Product):
-    length = models.IntegerField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='hangers')
-
-    class Meta:
-        verbose_name = 'hanger'
-        verbose_name_plural = 'hangers'
-
-"""
+    def get_absolute_url(self):
+        return reverse('shop:product_detail', args=[self.id, self.slug])

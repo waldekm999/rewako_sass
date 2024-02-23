@@ -1,0 +1,51 @@
+<
+{% for category, products in products_by_category.items %}
+        <h1>{{ category.name }}</h1>
+            {% for product in products %}
+                <p>{{ product.name }}</p>
+            {% endfor %}
+    {% endfor %}
+ -------------- dobre -------------------
+ <h5>{{ c.slug }}</h5>
+        <ul>
+            {% for p in products %}
+                {% if p.category == c %}
+                    <li>{{ p.name }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+
+
+ def product_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    products = Product.objects.filter(is_active=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products = products.filter(category=category)
+    return render(request, 'shop/product/list.html',
+                  {'category': category, 'categories': categories, 'products': products})
+
+
+
+ <div class="album mb-5 bg-light">
+        <div class="container d-flex flex-column flex-md-row flex-wrap" >
+            {% for p in products %}
+                <div class="card shadow-md m-3" style="width: 25rem;">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ p.image.url }}"</img>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ p.name }}</h5>
+                        <p class="card-text">{{ p.describe }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+            </div>
+          </div>
+            {% endfor %}
+        </div>
+    </div>
