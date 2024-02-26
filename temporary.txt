@@ -6,6 +6,13 @@
             {% endfor %}
     {% endfor %}
  -------------- dobre -------------------
+
+ {% for c in categories %}
+    <button class="btn btn-primary my-2">{{ c.name }}</button>
+ {% endfor %}
+
+
+
  <h5>{{ c.slug }}</h5>
         <ul>
             {% for p in products %}

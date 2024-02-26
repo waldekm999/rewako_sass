@@ -1,17 +1,33 @@
 from django.shortcuts import render, get_object_or_404
 from products.models import Product, Category
 
-
-
-def product_list(request):
+"""
+def product_list(request, category_slug=None):
+    category = None
     categories = Category.objects.all()
     products_by_category = {}
     for category in categories:
         products = Product.objects.filter(category=category)
-       #print(f"Category: {category.name}, Products: {products}")  # Debug print
         products_by_category[category] = products
-    #print(f"Products by category: {products_by_category}")  # Debug print
-    return render(request, 'shop/product/list.html', {'categories': categories, 'products_by_category': products_by_category})
+    products_by_category = products_by_category.filter(is_active=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products_by_category = products_by_category.filter(category=category)
+    return render(request, 'shop/product/list.html',
+                  {'categories': categories,
+                   'products_by_category': products_by_category})
+                """
+
+
+def product_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    products = Product.objects.filter(is_active=True)
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        products = products.filter(category=category)
+    return render(request, 'shop/product/list.html',
+                  {'category': category, 'categories': categories, 'products': products})
 
 
 def product_detail(request, id, slug):
