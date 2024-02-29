@@ -1,0 +1,10 @@
+File "/home/waldekm999/Projekty/Rewako/rewako_sass/products/models.py", line 94, in gross_price
+    gross_price = self.price * tax_multiplier
+TypeError: unsupported operand type(s) for *: 'decimal.Decimal' and 'float'
+[26/Feb/2024 21:38:02] "POST /cart/add/10/ HTTP/1.1" 500 80136
+/home/waldekm999/Projekty/Rewako/rewako_sass/cart/views.py changed, reloading.
+
+
+File "/home/waldekm999/Projekty/Rewako/rewako_sass/cart/views.py", line 16, in cart_add
+    update_quantity=cd['update'])
+KeyError: 'update'
