@@ -7,6 +7,29 @@
     {% endfor %}
  -------------- dobre -------------------
 
+
+ <div class="container">
+    <div>
+    <img src="{{ product.image.url }}">
+    <h1>{{ product.name }}</h1>
+    <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+    <p class=>{{ product.price }} zł</p>
+    {{ product.describe|linebreaks }}
+    </div>
+
+    <p >{{ product.gross_price }} PLN</p>
+    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+    {{ cart_product_form }}
+    {% csrf_token %}
+    <input type="submit" value="Dodaj do koszyka">
+    </form>
+</div>
+
+
+
+
+
+
  {% for c in categories %}
     <button class="btn btn-primary my-2">{{ c.name }}</button>
  {% endfor %}

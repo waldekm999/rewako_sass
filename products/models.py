@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.urls import reverse
 
@@ -90,7 +92,7 @@ class Product(models.Model):
         if self.tax == 0:
             return self.price
         else:
-            tax_multiplier = 1 + (self.tax / 100)
+            tax_multiplier = Decimal(1 + (self.tax / 100))
             gross_price = self.price * tax_multiplier
             return gross_price
 

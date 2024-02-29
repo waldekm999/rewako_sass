@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% if category %}{{ category.title }}{% else %}Produkty{% endif %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card" style="width: 60rem;">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="width: 60rem;">
+        <div class="card-body">
+            <h3 class="card-title">{{ product.name }}</h3>
+            <h5 class="card-title"><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h5>
+            <p class="card-text" >{{ product.price }} PLN Netto</p>
+            <p class="card-text">{{ product.gross_price }} PLN Brutto</p>
+            <p class="card-text">{{ product.describe|linebreaks }}</p>
+            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+            <input type="submit" value="Dodaj do koszyka">
+            </form>
+        </div>
+    </div>
+
+
+</div>
+<div class="container">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
