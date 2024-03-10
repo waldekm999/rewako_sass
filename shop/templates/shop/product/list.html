@@ -6,23 +6,24 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+
     <section class="pb-4 text-center container mb-3">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light mb-4">Witamy W Naszym Sklepie</h1>
-        <p class="lead text-muted mb-4">Na tej stronie znajdziesz wszystkie nasze produkty. Użyj przycisku poniżej aby wyświetlić zawartość wg kategorii .</p>
-        <div class="d-flex flex-column flex-lg-row justify-content-center gap-3">
-            {% for c in categories %}
-            <a href="{{ c.get_absolute_url }}" class="btn btn-primary my-2 {% if category.slug == c.slug %} active {% endif %} ">
-                {{ c.name }}
-            </a>
-            {% endfor %}
-            <a href="{% url 'shop:product_list' %}" class="btn btn-primary my-2 {% if not category %} active {% endif %}">
-                Wszystkie Katergorie
-            </a>
+            <h1 class="fw-light mb-4">Witamy W Naszym Sklepie</h1>
+            <p class="lead text-muted mb-4">Na tej stronie znajdziesz wszystkie nasze produkty. Użyj przycisku poniżej aby wyświetlić zawartość wg kategorii .</p>
+            <div class="d-flex flex-column flex-lg-row justify-content-center gap-3">
+                {% for c in categories %}
+                <a href="{{ c.get_absolute_url }}" class="btn cButtonLink my-2 py-2  {% if category.slug == c.slug %} cActive {% endif %}" >
+                    {{ c.name }}
+                </a>
+                {% endfor %}
+                <a href="{% url 'shop:product_list' %}" class="btn cButtonLink my-2 py-2 {% if not category %} cActive {% endif %}">
+                    Wszystkie Katergorie
+                </a>
+            </div>
+        </div>
     </div>
-      </div>
 
   </section>
 
@@ -30,17 +31,17 @@
 
         <div class=" d-flex flex-row flex-wrap justify-content-center gap-5 mx-5">
             {% for product in products %}
-                <div class="card shadow-md mx-3 rounded" style="width: 25rem;">
+                <div class="card shadow-md mx-3 p-4 rounded cCard" style="width: 26rem;">
                     <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ product.image.url }}" img>
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">{{ product.price }} PLN netto</p>
                         <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <button type="button" class="btn btn-primary me-2">Do Koszyka</button>
+                          <button type="button" class="btn  me-2 cButton">Do Koszyka</button>
                           <a href="{{ product.get_absolute_url }}" class="btn btn-secondary">Zobacz Więcej</a>
                         </div>
-                        <small class="text-muted">+23% VAT</small>
+                        
                       </div>
                 </div>
           </div>
@@ -51,7 +52,7 @@
 
 
 
-</div>
+
 {%endblock%}
 
 

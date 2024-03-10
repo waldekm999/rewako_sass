@@ -7,19 +7,15 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 
-   <!-- <link href="{% static 'css/headers.css' %}" rel="stylesheet"> -->
-    <style>
-        .errorlist {
-            color: red;
-        }
-    </style>
+   <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
 
 
-<div class="container-fluid bg-light">
-<nav class="navbar navbar-expand-xl bg-success navbar-dark fixed-top shadow-sm">
+<div class="container-fluid bg-light mx-auto pb-4">
+<nav class="navbar navbar-expand-xl navbar-dark fixed-top shadow-sm cGreen ">
       <div class="container">
         <a href="#" class="navbar-brand">
             <img src="{% static 'images/logo_biale.png' %}" alt="Logo" width="160" height="70">
@@ -52,6 +48,21 @@
             </li>
               <li class="nav-item">
               <a href="#" class="nav-link">Sklep</a>
+            </li>
+              <li class="nav-item mt-1">
+              <a href="{% url 'cart:cart_detail' %}" class="btn btn-outline-light btn-sm ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                  </svg>
+                  <!-- <span >8 </span> -->
+                  {% with total_items=cart|length %}
+                  {% if total_items > 0 %}
+                  <span class="badge bg-danger">{{ total_items }}</span>
+                  {% else %}
+                  <span class="badge bg-danger">0</span>
+                  {% endif %}
+                  {% endwith %}
+              </a>
             </li>
               <li class="nav-item ms-5">
                 <form class="d-flex" role="search">

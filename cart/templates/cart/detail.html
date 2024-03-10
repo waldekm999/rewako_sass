@@ -7,8 +7,10 @@
 
 {% block content %}
 
-<h1>Koszyk za zakupy</h1>
-<table class="table">
+<div class="container-xl mx-auto py-5">
+
+<h1>Twój koszyk</h1>
+<table class="table table-hover m-5">
     <thead>
         <tr>
             <th>Obraz</th>
@@ -25,33 +27,33 @@
             <tr>
                 <td>
                     <a href="{{ product.get_absolute_url }}">
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100" height="100">
+                        <img style="width: 10rem;" src="{{ product.image.url }}" alt="{{ product.name }}" width="100" height="100">
                     </a>
                 </td>
-                <td>
-                    <a href="{{ product.get_absolute_url }}">
+                <td class="align-middle">
+                    <a class="text-decoration-none" href="{{ product.get_absolute_url }}">
                         {{ product.name }}
                     </a>
                 </td>
-                <td>
-                  <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                <td class="align-middle">
+                  <form  action="{% url 'cart:cart_add' product.id %}" method="post">
                     {{ item.update_quantity_form.quantity }}
                     {{ item.update_quantity_form.override }}
-                    <input type="submit" value="Uaktualnij">
+                    <input class="btn btn-primary mx-4" type="submit" value="Uaktualnij">
                     {% csrf_token %}
                   </form>
                 </td>
-                <td>
+                <td class="align-middle">
                   <form action="{% url 'cart:cart_remove' product.id %}" method="post">
-                    <input type="submit" value="Usuń">
+                    <input class="btn btn-danger" type="submit" value="Usuń">
                     {% csrf_token %}
                   </form>
                 </td>
 
-                <td>
+                <td class="align-middle">
                     {{ item.price }} PLN
                 </td>
-                <td>
+                <td class="align-middle">
                     {{ item.total_price }} PLN
                 </td>
             </tr>
@@ -68,13 +70,16 @@
     </tbody>
 </table>
 
+
+
+
 <a href="{% url 'shop:product_list' %}">
-    <button class="btn btn-primary">Kontynuuj zakupy</button>
+    <button class="btn btn-primary mx-4">Kontynuuj zakupy</button>
 </a>
 
 
-<a href="#" class="button">Do kasy</a>
+<a href="#" class="btn cButton">Do kasy</a>
 
-
+</div>
 
 {% endblock %}
