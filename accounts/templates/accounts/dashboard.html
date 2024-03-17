@@ -4,20 +4,25 @@
     <div class="container">
         <h1 class="h1">Panel główny</h1>
         <p class="h5">Witaj w panelu głównym.</p>
-        <p>Nazwa użytkownika{{ request.user.username }}</p>
-        <p>Wmail: {{ request.user.email }}</p>
-        <p>Czy jest pracownikiem: {{ request.user.is_staff }}</p>
-        <p>Czy to superuser: {{ request.user.is_superuser }}</p>
-        <p>Czy aktywny: {{ request.user.is_active }}</p>
-        <p>Czy anonimowy: {{ request.user.is_anonymous }}</p>
-        <p>Ostatnie logowanie: {{ request.user.last_login }}</p>
+
+
+        <p>Nazwa użytkownika: {{ request.user.username }}</p>
+        <p>Adres e-mail: {{ request.user.email }}</p>
         <p>Data utworzenia konta: {{ request.user.date_joined }}</p>
-        <p>{{ request.user.groups.all }}</p>
-        <p>{{ request.user.user_permissions.all }}</p>
-        <p>Nazwa pełna: {{ request.user.get_full_name }}</p>
-        <p>Nazwa skrócona: {{ request.user.get_short_name }}</p>
-        <p>{{ request.user.get_username }}</p>
-        <p></p><a href="{% url 'logout' %}">Wyloguj się</a></p>
+        <p>Ostatnie logowanie: {{ request.user.last_login }}</p>
+        <h5>Dane do faktury</h5>
+        <p>Nazwa: {{ request.user.profile.nazwa_firmy }}</p>
+        <p>Adres: {{request.user.profile.adres}}</p>
+        <p>Kod pocztowy: {{ request.user.profile.kod_pocztowy }}</p>
+        <p>Miasto: {{ request.user.profile.miasto }}</p>
+        <p>NIP: {{ request.user.profile.NIP }}</p>
+        <p>Telefon: {{ request.user.profile.telefon }}</p>
+
+
+        <p>Właściciel konta: {{ request.user.get_full_name }}</p>
+
+        <p><a href="{% url 'edit' %}">Edytuj dane</a></p>
+        <p><a href="{% url 'logout' %}">Wyloguj się</a></p>
         <p><a href="{% url 'password_change' %}">Zmień hasło</a></p>
     </div>
 

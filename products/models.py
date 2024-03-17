@@ -1,4 +1,4 @@
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 
 from django.db import models
 from django.urls import reverse
@@ -94,6 +94,7 @@ class Product(models.Model):
         else:
             tax_multiplier = Decimal(1 + (self.tax / 100))
             gross_price = self.price * tax_multiplier
+            gross_price = gross_price.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
             return gross_price
 
     class Meta:
